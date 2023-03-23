@@ -30,12 +30,25 @@ app.get('/', (req, res) => {
 
 // Posts Types routes
 app.use('/post-types', require('./src/routes/postType.routes'));
+// Create : /post-types/create
+// Update : /post-types/update
+// GetAll : /post-types
+// GetById : /post-types/:id
+// Delete : /post-types/delete
 
 // Posts routes
 app.use('/posts', require('./src/routes/post.routes'));
+// Create : /posts/create
+// Update : /posts/update
+// GetAll : /posts
+// GetById : /posts/:id
+// Delete : /posts/delete
 
 // Users routes
 app.use('/users', require('./src/routes/user.routes'));
+// SignUp : /users/signup
+// SignIn : /users/signin
+
 
 // Lancer le serveur
 app.listen(port, async () => {

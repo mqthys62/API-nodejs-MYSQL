@@ -33,7 +33,8 @@ exports.Create = async (req, res) => {
 
         return res.status(201).json({
             error: false,
-            message: "Le post a été créé avec succès."
+            message: "Le post a été créé avec succès.",
+            data: postData
         });
     } catch (error) {
         return res.status(500).json({

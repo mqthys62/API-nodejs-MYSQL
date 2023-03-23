@@ -4,7 +4,7 @@ const postController = require("../controllers/post.controller");
 const authenticateUser = require("../middlewares/authentication.middleware");
 
 // Create
-router.post('/create', authenticateUser, postController.Create);
+router.post('/create', authenticateUser(3), postController.Create);
 
 // Read
 // GetAll

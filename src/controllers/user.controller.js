@@ -59,7 +59,7 @@ exports.SignUp = async (req, res) => {
 
         const encodedPassword = await encryptPassword(password);
         // Générer un code à 6 chiffres
-        const code = Math.floor(100000 + Math.random() * 900000);
+        // const code = Math.floor(100000 + Math.random() * 900000);
 
         const userData = {
             firstName: firstName,
@@ -67,13 +67,14 @@ exports.SignUp = async (req, res) => {
             username: username,
             email: email,
             password: encodedPassword,
-            emailVerificationCode: code,
-            // Rajouter 15 minutes à la date actuelle
-            emailVerificationCodeExpiration: new Date(Date.now() + 15 * 60 * 1000)
+            // emailVerificationCode: code,
+            // // Rajouter 15 minutes à la date actuelle
+            // emailVerificationCodeExpiration: new Date(Date.now() + 15 * 60 * 1000)
+            isActive: true
         }
 
         // Envoi de l'email de vérification
-        await sendMail("accountVerification", { code: code }, email);
+        // await sendMail("accountVerification", { code: code }, email);
 
         await new User(userData).save();
         return res.status(201).json({
@@ -277,6 +278,34 @@ exports.SignIn = async (req, res) => {
         return res.status(500).json({
             error: true,
             message: "Une erreur interne est survenue, veuillez réessayer plus tard."
+        });
+    }
+}
+
+exports.GetProfile = async (req, res) => {
+    try {
+        const { id } = req.decoded;
+        // console.log("TEST")
+
+        const user = await User.findOne({ where: { id: id } });
+
+        if (!user) {
+            return res.status(404).json({
+                error: true,
+                message: "Utilisateur introuvable."
+            });
+        }
+
+        return res.status(200).json({
+            error: false,
+            message: "Profil récupéré.",
+            data: user
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            error: true,
+            message: "Une erreur est survenue, veuillez réessayer plus tard."
         });
     }
 }

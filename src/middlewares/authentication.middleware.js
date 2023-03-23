@@ -2,11 +2,11 @@ const User = require('../models/user.model');
 const jwt = require('jsonwebtoken');
 
 
-const authenticateUser = async (req, res, next) => {
+const authenticateUser = (minRank = 0) => async (req, res, next) => {
     try {
         // Récupérer le token d'authentification dans l'entête de la requête
         const authorizationHeader = req.headers.authorization;
-        
+        console.log("Rank minimum :", minRank)
         // Vérifier si le token existe dans l'entête de la requête
         if (!authorizationHeader || !authorizationHeader.split(' ')[1]) {
             // Si le token n'existe pas, retourner une erreur
@@ -24,6 +24,7 @@ const authenticateUser = async (req, res, next) => {
         const user = await User.findOne({ where: { accessToken: accessToken } });
 
         // Si l'utilisateur n'existe pas, retourner une erreur
+        console.log(accessToken)
         if (!user) {
             return res.status(403).json({ 
                 error: true,
