@@ -22,16 +22,9 @@ Post.init({
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  postType: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
 }, {
-  // On passe l'instance de sequelize à notre modèle
   sequelize,
-  // On définit le nom de notre modèle
   modelName: 'Post',
-  // On définit le nom de la table dans la base de données
   tableName: 'posts',
 });
 

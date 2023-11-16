@@ -24,16 +24,6 @@ module.exports = {
         allowNull: false,
         unique: true,
       },
-      // Le champ firstName est une chaîne de caractères non nulle
-      firstName: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      // Le champ lastName est une chaîne de caractères non nulle
-      lastName: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
       // Le champ password est une chaîne de caractères non nulle
       password: {
         type: Sequelize.TEXT('long'),

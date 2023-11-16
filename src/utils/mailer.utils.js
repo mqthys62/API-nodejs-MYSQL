@@ -8,12 +8,12 @@ const sendMail = async (type, args, email) => {
 
         // create reusable transporter object using the default SMTP transport
         let transporter = nodemailer.createTransport({
-            host: "smtp.ethereal.email",
-            port: 587,
-            secure: false, // true for 465, false for other ports
+            host: "smtp.anatra.o2switch.net",
+            port: 465,
+            secure: false,
             auth: {
-                user: testAccount.user, // generated ethereal user
-                pass: testAccount.pass, // generated ethereal password
+                user: "mspr@jeda1059.odns.fr", // generated ethereal user
+                pass: "Mspr8523.", // generated ethereal password
             },
         });
 

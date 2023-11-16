@@ -28,13 +28,6 @@ app.get('/', (req, res) => {
     res.send("Hello world!");
 });
 
-// Posts Types routes
-app.use('/post-types', require('./src/routes/postType.routes'));
-// Create : /post-types/create
-// Update : /post-types/update
-// GetAll : /post-types
-// GetById : /post-types/:id
-// Delete : /post-types/delete
 
 // Posts routes
 app.use('/posts', require('./src/routes/post.routes'));

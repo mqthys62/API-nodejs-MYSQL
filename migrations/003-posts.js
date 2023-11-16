@@ -28,16 +28,6 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
-      postType: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'posts-types',
-          key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
-      },
       createdAt: {
         type: Sequelize.DATE
       },

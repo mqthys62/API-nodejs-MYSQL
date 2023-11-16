@@ -6,9 +6,9 @@ const jwt = require('jsonwebtoken');
 
 exports.SignUp = async (req, res) => {
     try {
-        const { firstName, lastName, email, password, username } = req.body;
+        const { email, password, username } = req.body;
 
-        if (!firstName || !lastName || !email || !password || !username) {
+        if ( !email || !password || !username) {
             return res.status(400).json({
                 error: true,
                 message: "Requête invalide."
@@ -20,12 +20,6 @@ exports.SignUp = async (req, res) => {
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/i;
         const usernameRegex = /^[a-zA-Z0-9._-]{MIN_CHARS,MAX_CHARS}$/i;
 
-        // if (!nameRegex.test(firstName) || !nameRegex.test(lastName)) {
-        //     return res.status(400).json({
-        //         error: true,
-        //         message: "Le nom et le prénom doivent contenir au moins 2 caractères et ne doivent pas contenir de chiffres."
-        //     });
-        // }
 
         if (!emailRegex.test(email)) {
             return res.status(400).json({
@@ -62,8 +56,6 @@ exports.SignUp = async (req, res) => {
         // const code = Math.floor(100000 + Math.random() * 900000);
 
         const userData = {
-            firstName: firstName,
-            lastName: lastName,
             username: username,
             email: email,
             password: encodedPassword,

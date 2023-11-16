@@ -1,31 +1,22 @@
 const Post = require('../models/post.model');
-const PostType = require('../models/postType.model');
 
 exports.Create = async (req, res) => {
     try {
-        const { title, content, postType } = req.body;
+        const { title, content } = req.body;
         const { id: postedBy } = req.decoded;
 
-        if (!title || !content || !postType) {
+        if (!title || !content) {
             return res.status(400).json({
                 error: true,
                 message: "Requête invalide."
             });
         }
 
-        const isExist = await PostType.findOne({ where: { id: postType } });
 
-        if (!isExist) {
-            return res.status(404).json({
-                error: true,
-                message: "Le type de post n'existe pas."
-            });
-        }
 
         const postData = {
             title: title,
             content: content,
-            postType: postType,
             postedBy: postedBy
         }
 
@@ -97,7 +88,7 @@ exports.GetById = async (req, res) => {
 
 exports.Update = async (req, res) => {
     try {
-        const { title, content, id, postType } = req.body;
+        const { title, content, id} = req.body;
 
         if (!id || isNaN(id)) {
             return res.status(400).json({
@@ -115,29 +106,9 @@ exports.Update = async (req, res) => {
             });
         }
 
-        if (postType) {
-            const isExist = await PostType.findOne({ where: { id: postType } });
-
-            if (!isExist) {
-                return res.status(404).json({
-                    error: true,
-                    message: "Le type de post n'existe pas."
-                });
-            }
-        }
-
-        /* 
-        if (title) {
-            return title
-        } else {
-            return post.title
-        }
-        */
-
         const postData = {
             title: title ? title : post.title,
             content: content ? content : post.content,
-            postType: postType ? postType : post.postType,
         }
 
         await post.update(postData);
